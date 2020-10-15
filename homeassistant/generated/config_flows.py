@@ -203,6 +203,7 @@ FLOWS = [
     "sonarr",
     "songpal",
     "sonos",
+    "spc",
     "speedtestdotnet",
     "spider",
     "spotify",
