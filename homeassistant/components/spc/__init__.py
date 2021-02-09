@@ -72,6 +72,8 @@ async def async_setup_entry(hass, entry):
 
     hass.data.setdefault(DOMAIN, {})
 
+    hass.data.setdefault(DOMAIN, {})
+
     session = aiohttp_client.async_get_clientsession(hass)
 
     client = SpcWebGateway(
@@ -79,7 +81,7 @@ async def async_setup_entry(hass, entry):
         session=session,
         api_url=config[CONF_API_URL],
         ws_url=config[CONF_WS_URL],
-        async_callback=update_callback,
+        async_callback=update_callback
     )
 
     hass.data[DOMAIN][entry.entry_id] = client
