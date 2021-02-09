@@ -62,12 +62,13 @@ async def async_setup_entry(hass, entry):
 
     config = entry.data
 
-    @callback
-    def async_update_callback(spc_object):
+    async def update_callback(spc_object):
         if isinstance(spc_object, Area):
-            async_dispatcher_send(hass, SIGNAL_UPDATE_ALARM.format(spc_object.id))
+            async_dispatcher_send(
+                hass, SIGNAL_UPDATE_ALARM.format(spc_object.id))
         elif isinstance(spc_object, Zone):
-            async_dispatcher_send(hass, SIGNAL_UPDATE_SENSOR.format(spc_object.id))
+            async_dispatcher_send(
+                hass, SIGNAL_UPDATE_SENSOR.format(spc_object.id))
 
     hass.data.setdefault(DOMAIN, {})
 
@@ -78,7 +79,7 @@ async def async_setup_entry(hass, entry):
         session=session,
         api_url=config[CONF_API_URL],
         ws_url=config[CONF_WS_URL],
-        async_callback=async_update_callback,
+        async_callback=update_callback,
     )
 
     hass.data[DOMAIN][entry.entry_id] = client
